@@ -14,6 +14,13 @@ public class ExampleEntity {
 
     private String something;
 
+    private String usedBy;
+
+    private Integer inUse = 0;
+
+/*    @Version
+    private long version;*/
+
     public Integer getId() {
         return id;
     }
@@ -29,4 +36,28 @@ public class ExampleEntity {
     public void setSomething(String something) {
         this.something = something;
     }
+
+    public String getUsedBy() {
+        return usedBy;
+    }
+
+    public void setUsedBy(String usedBy) {
+        this.usedBy = usedBy;
+    }
+
+    public Integer getInUse() {
+        return inUse;
+    }
+
+    public void setInUse(Integer inUse) {
+        this.inUse = inUse;
+    }
+
+    /*    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }*/
 }

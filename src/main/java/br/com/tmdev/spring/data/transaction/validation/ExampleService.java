@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -50,14 +48,23 @@ public class ExampleService {
         return exampleRepository.findAll();
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    //@Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update(ExampleEntity exampleEntity) {
-        exampleEntity.setSomething("Via update: " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
         exampleRepository.save(exampleEntity);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public int updateUsedBy(ExampleEntity exampleEntity) {
+        return exampleRepository.updateUsedBy(exampleEntity.getUsedBy(), exampleEntity.getId());
+    }
+
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public ExampleEntity findById(Integer id) {
         return exampleRepository.findById(id).orElse(null);
+    }
+
+    public ExampleEntity insert(ExampleEntity exampleEntity) {
+        return exampleRepository.save(exampleEntity);
     }
 
 }
